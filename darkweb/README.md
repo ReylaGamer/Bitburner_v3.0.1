@@ -1,15 +1,15 @@
-# Darkweb system
+# Darkweb stack
 
-This directory contains the darkweb automation stack and its release-managed scripts.
+This directory contains the darkweb automation stack and the files that are version-managed together.
 
-Expected files:
+Runtime ownership:
+- `dark-startup.js` is the authoritative release launcher on `home`.
+- `dark-agent.js` is the deployment and remote-process coordinator.
+- `dark-status.js` is a home-only monitoring script.
+- `dark-password-review.js` is a home-only credential review script.
+- worker scripts are started remotely and inherit the same deployment version.
 
-- `dark-startup.js` — home-only release launcher.
-- `dark-agent.js` — deployment and remote worker controller.
-- `dark-status.js` — home-only status service.
-- `dark-password-review.js` — home-only password review service.
-- `dark-cache.js` — remote worker.
-- `dark-phishing.js` — remote worker.
-- `dark-collect.js` — remote worker.
-
-The propagation bundle is intentionally limited to the agent and remote workers. Home-only services are not copied to remote nodes.
+Important:
+- `dark-status.js` and `dark-password-review.js` are intentionally not part of the remote bundle.
+- `darkweb/dark-agent.js` is the only startup process that propagates the remote worker bundle.
+- Version changes are driven entirely from `darkweb/dark-startup.js` through `ns.args[0]`.

@@ -7,3 +7,6 @@ Scripts placed here should not be assumed to participate in darkweb startup, dep
 the batcher is the only file that needs to be kicked off manually from the home node.
 
 home/run hwgw-cluster-batcherV4.js
+
+do to REM allocation prioritizing this process over all other scripts I don't use this at the same time as 
+crawling through the dark web part of the game as other processes aren't likely to have any bandwidth.

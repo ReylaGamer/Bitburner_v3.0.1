@@ -1,0 +1,9 @@
+# Ref: prior batcher design
+
+This file is kept as a historical reference for earlier batch logic and an example of the original architecture.
+
+```javascript
+// Example historical batcher idea kept only for reference.
+const version = "legacy-batcher-reference";
+console.log(version);
+```

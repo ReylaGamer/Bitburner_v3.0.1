@@ -1,12 +1,8 @@
-# Archive
+# Archived reference material
 
-This directory stores older versions, retired implementations, and reference snippets kept for historical or research purposes.
+This directory stores older scripts, temporary experiments, and reference snippets that are not active runtime code.
 
-Archived code is not part of the active runtime and should not be copied into deployment bundles or startup flows unless explicitly restored.
-
-Recommended organization:
-
-- `archive/versions/` — prior released versions.
-- `archive/snippets/` — useful reference snippets and experiments.
-
-When archiving a file, include its original path and the reason it was archived where practical.
+Rules:
+- do not run files from this directory unless explicitly restored to active use
+- keep old versions here instead of mixing them into the live system
+- include a short note describing why each archived item was preserved

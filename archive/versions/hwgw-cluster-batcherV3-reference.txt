@@ -1,0 +1,8 @@
+# Ref: cluster batcher V3
+
+This file is preserved as an archived implementation reference only.
+
+```javascript
+// Legacy V3 reference notes.
+// Not active. Not deployed. Not used by the runtime.
+```

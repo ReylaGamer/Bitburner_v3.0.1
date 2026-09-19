@@ -1,3 +1,6 @@
 # Ignore local credential runtime store
 # This file is intentionally not versioned and should remain on home only.
 darkweb/dark-credentials.json
+
+# Runtime lock file for the HWGW cluster batcher
+hwgw-cluster-batcher-lock.txt

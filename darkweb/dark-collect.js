@@ -9,7 +9,7 @@ export async function main(ns) {
 
   ns.disableLog("ALL");
   ns.tail();
-  
+
   ns.print(
     `[dark-collect] running on ${hostname}; deployment ${version}`,
   );
@@ -30,6 +30,9 @@ export async function main(ns) {
  * @param {string} sourceHostname
  */
 async function collectFiles(ns, hostname) {
+
+  const logFile = "dnet_collect_stats.json";
+  
   const files = ns
     .ls(hostname)
     .filter((filename) => isCollectableTextFile(filename));
@@ -39,7 +42,25 @@ async function collectFiles(ns, hostname) {
     return;
   }
 
+  ns.print(`Found ${files.length} files to process.`);
+
+  // 1. Initialize or load the existing log tracking metrics
+  let stats = {
+        totalfiles: {$files.length},
+        processedFiles: [],
+        lastExecutionTime: Date.now()
+    };
+
+  if (ns.fileExists(logFile)) {
+        try {
+            stats = JSON.parse(ns.read(logFile));
+        } catch (e) {
+            ns.print("WARNING: Stats file corrupt. Re-initializing logs.");
+        }
+  }
+  // 2. Loop through and process each file found
   for (const filename of files) {
+
     const destinationName = makeUniqueFilename(
       hostname,
       filename,
@@ -73,6 +94,9 @@ async function collectFiles(ns, hostname) {
           `${hostname}: failed to collect ${filename}`,
         );
         continue;
+      } 
+      else if (copied && (copied.success || !copied.message?.toLowerCase().includes("fail"))) {
+        stats.processedFiles.push(file);
       }
 
       ns.print(
@@ -92,12 +116,8 @@ async function collectFiles(ns, hostname) {
       }
     }
   }
-  let status = {
-     hostname,
-     version,
-     updatedAt: Date.now(),
-  };
-  ns.write(statusFile, JSON.stringify(status, null, 2), "w");
+  // 3. Write clean, pretty-printed data back to the JSON file on each loop step
+  await ns.write(logFile, JSON.stringify(stats, null, 2), "w");
 }
 
 /**

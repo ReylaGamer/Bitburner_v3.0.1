@@ -11,5 +11,5 @@ Runtime ownership:
 
 Important:
 - `dark-status.js` and `dark-password-review.js` are intentionally not part of the remote bundle.
-- `darkweb/dark-agent.js` is the only startup process that propagates the remote worker bundle.
-- Version changes are driven entirely from `darkweb/dark-startup.js` through `ns.args[0]`.
+- `dark-agent.js` is the only startup process that propagates the remote dark web worker bundle.
+- Version changes are driven entirely from `dark-startup.js` through `ns.args[0]`.

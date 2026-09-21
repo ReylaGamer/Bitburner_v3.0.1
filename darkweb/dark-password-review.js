@@ -59,10 +59,3 @@ function summarizeText(contents) {
 
   return `${words.length} words / ${uniqueWords.size} unique tokens`;
 }
-
-/**
- * @param {AutocompleteData} data
- */
-export function autocomplete(data) {
-  return [];
-}

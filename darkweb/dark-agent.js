@@ -24,7 +24,7 @@ export async function main(ns) {
   }
 
   while (true) {
-    let connectedHosts = (ns.dnet.probe() || ["darkweb"];
+    let connectedHosts = (ns.dnet.probe() || ["darkweb"]);
 
     for (const hostname of connectedHosts) {
       if (hostname === HOME || hostname === source) {

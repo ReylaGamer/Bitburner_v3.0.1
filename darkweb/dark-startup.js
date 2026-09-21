@@ -1,7 +1,6 @@
 /** @param {NS} ns */
 export async function main(ns) {
   const HOME = "home";
-  const DARKWEB_ROOT = "darkweb/";
   const DEPLOY_VERSION = "2026-09-19.14";
 
   const STARTUP_SCRIPTS = [
@@ -27,7 +26,7 @@ export async function main(ns) {
   let startedCount = 0;
 
   for (const script of STARTUP_SCRIPTS) {
-    const scriptPath = `${DARKWEB_ROOT}${script}`;
+    const scriptPath = `${script}`;
 
     if (!ns.fileExists(scriptPath, HOME)) {
       ns.tprint(`[dark-startup] missing startup script: ${scriptPath}`);
@@ -60,7 +59,7 @@ function stopExistingStartupScripts(ns, scripts) {
   for (const process of ns.ps("home")) {
     const filename = process.filename;
     const isDarkwebStartup = scripts.some(
-      (script) => filename === `darkweb/${script}` || filename.endsWith(`/${script}`),
+      (script) => filename === `${script}` || filename.beginsWith(`${script}`),
     );
 
     if (!isDarkwebStartup) {
@@ -72,11 +71,4 @@ function stopExistingStartupScripts(ns, scripts) {
       `[dark-startup] stopped prior ${process.filename}; PID ${process.pid}`,
     );
   }
-}
-
-/**
- * @param {AutocompleteData} data
- */
-export function autocomplete(data) {
-  return [];
 }

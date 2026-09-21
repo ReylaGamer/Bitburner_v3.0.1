@@ -27,10 +27,3 @@ export async function main(ns) {
     await ns.sleep(STATUS_INTERVAL);
   }
 }
-
-/**
- * @param {AutocompleteData} data
- */
-export function autocomplete(data) {
-  return [];
-}

@@ -145,6 +145,7 @@ function isManagedWorker(filename) {
     "dark-phishing.js",
     "dark-collect.js",
     "dark-credentials.json",
+    "dnet_phishing_stats.json"
   ]).has(filename);
 }
 

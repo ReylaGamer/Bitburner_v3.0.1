@@ -1,9 +1,8 @@
 /** @param {NS} ns */
 export async function main(ns) {
-  const DARKWEB_ROOT = "darkweb/";
   const version = String(ns.args[0] ?? "unversioned");
   const hostname = ns.getHostname();
-  const STATUS_FILE = `${DARKWEB_ROOT}dark-status.json`;
+  const STATUS_FILE = `dark-status.json`;
   const STATUS_INTERVAL = 5000;
 
   ns.disableLog("sleep");

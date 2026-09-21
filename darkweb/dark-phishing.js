@@ -1,9 +1,9 @@
 /** @param {NS} ns */
 export async function main(ns) {
-  const DARKWEB_ROOT = "darkweb/";
+  //const DARKWEB_ROOT = "darkweb/";
   const version = String(ns.args[0] ?? "unversioned");
   const hostname = ns.getHostname();
-  const statusFile = `${DARKWEB_ROOT}dark-phishing-status.json`;
+  //const statusFile = `${DARKWEB_ROOT}dark-phishing-status.json`;
 
   ns.disableLog("ALL");
   ns.tail();

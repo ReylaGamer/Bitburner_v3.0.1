@@ -5,7 +5,6 @@ export async function main(ns) {
 
   const STARTUP_SCRIPTS = [
     "dark-agent.js",
-    "dark-status.js",
     "dark-password-review.js",
   ];
 

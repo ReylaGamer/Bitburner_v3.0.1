@@ -14,17 +14,13 @@ export async function main(ns) {
     `[dark-collect] running on ${hostname}; deployment ${version}`,
   );
 
-  while (true) {
-    try {
+  try {
       await collectFiles(ns, hostname);
     } catch (error) {
       ns.print(
         `${hostname}: collection cycle failed: ${formatError(error)}`,
       );
     }
-
-    await ns.sleep(300000);
-  }
 }
 
 /**

@@ -58,7 +58,7 @@ function stopExistingStartupScripts(ns, scripts) {
   for (const process of ns.ps("home")) {
     const filename = process.filename;
     const isDarkwebStartup = scripts.some(
-      (script) => filename === `${script}` || filename.beginsWith(`${script}`),
+      (script) => filename === `${script}` || filename.startsWith(`${script}`),
     );
 
     if (!isDarkwebStartup) {

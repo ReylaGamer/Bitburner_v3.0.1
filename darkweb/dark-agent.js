@@ -2,15 +2,14 @@
 export async function main(ns) {
   ns.disableLog("sleep");
 
-  const DARKWEB_ROOT = "darkweb/";
   const HOME = "home";
-  const AGENT = `${DARKWEB_ROOT}dark-agent.js`;
+  const AGENT = `dark-agent.js`;
   const DEPLOY_VERSION = String(ns.args[0] ?? "unversioned");
 
   const WORKERS = [
-    `${DARKWEB_ROOT}dark-cache.js`,
-    `${DARKWEB_ROOT}dark-phishing.js`,
-    `${DARKWEB_ROOT}dark-collect.js`,
+    `dark-cache.js`,
+    `dark-phishing.js`,
+    `dark-collect.js`,
   ];
 
   const SCAN_INTERVAL = 5000;
@@ -25,7 +24,7 @@ export async function main(ns) {
   }
 
   while (true) {
-    const connectedHosts = getConnectedHosts(ns);
+    let connectedHosts = (ns.dnet.probe() || ["darkweb"];
 
     for (const hostname of connectedHosts) {
       if (hostname === HOME || hostname === source) {
@@ -174,21 +173,3 @@ function stopManagedProcesses(ns, hostname, files) {
   }
 }
 
-/**
- * @param {NS} ns
- * @returns {string[]}
- */
-function getConnectedHosts(ns) {
-  try {
-    return ns.scan(ns.getHostname());
-  } catch (error) {
-    return [];
-  }
-}
-
-/**
- * @param {AutocompleteData} data
- */
-export function autocomplete(data) {
-  return [];
-}

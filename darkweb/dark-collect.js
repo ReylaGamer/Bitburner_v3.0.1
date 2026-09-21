@@ -46,7 +46,7 @@ async function collectFiles(ns, hostname) {
 
   // 1. Initialize or load the existing log tracking metrics
   let stats = {
-        totalfiles: {$files.length},
+        totalfiles: files.length,
         processedFiles: [],
         lastExecutionTime: Date.now()
     };
@@ -166,7 +166,7 @@ function isManagedWorker(filename) {
     "dark-collect.js",
     "dark-credentials.json",
     "dnet_phishing_stats.json",
-    "dnet_cache_stats.json"
+    "dnet_cache_stats.json",
     "dnet_collect_stats.json"
   ]).has(filename);
 }

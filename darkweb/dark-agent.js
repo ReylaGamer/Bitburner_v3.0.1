@@ -52,13 +52,40 @@ export async function main(ns) {
 function ensureLocalWorkers(ns, workers, version) {
   const hostname = ns.getHostname();
 
+  // HOME constant check (Assumes HOME is defined globally elsewhere, e.g., const HOME = "home";)
   if (hostname === HOME) {
     return;
+  }
+
+  // 1. Read completion status from the two separate JSON files
+  let isCached = false;
+  let isCollected = false;
+
+  const cacheLogFile = "dnet_cache_stats.json";
+  const collectLogFile = "dnet_collect_stats.json";
+
+  // Check cache worker completion status
+  if (ns.fileExists(cacheLogFile, hostname)) {
+    isCached = true;
+  }
+
+  // Check collect worker completion status
+  if (ns.fileExists(collectLogFile, hostname)) {
+    isCollected = true;
   }
 
   const processes = ns.ps(hostname);
 
   for (const scriptPath of workers) {
+    // 3. Skip specific worker if its dedicated JSON log exists which in this context will signal completion
+    if (scriptPath.includes("dark-cache.js") && isCached) {
+      continue;
+    }
+    if (scriptPath.includes("dark-collect.js") && isCollected) {
+      continue;
+    }
+
+    // Standard baseline process safeguards
     if (processes.some((process) => process.filename === scriptPath)) {
       continue;
     }
@@ -83,6 +110,7 @@ function ensureLocalWorkers(ns, workers, version) {
     }
   }
 }
+
 
 /**
  * @param {NS} ns
